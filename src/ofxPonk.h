@@ -26,6 +26,7 @@ public:
     void setup(std::string name = "oF_stream", int uniqueID = 123124, std::string destinationIP = "127.0.0.1", uint8_t dataFormat = PONK_DATA_FORMAT_XY_F32_RGB_U8);
     void newFrame();
     void add(ofPolyline poly, ofColor color = ofColor::white, std::vector<std::pair<std::string, float>> metaData = {});
+    void add(ofPolyline poly, std::vector<ofColor> colors, std::vector<std::pair<std::string, float>> metaData = {});
     void sendFrame();
     
 private:

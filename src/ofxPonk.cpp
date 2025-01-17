@@ -26,7 +26,12 @@ void ofxPonk::newFrame(){
 }
 
 void ofxPonk::add(ofPolyline poly, ofColor color, std::vector<std::pair<std::string, float>> metaData){
+    add(poly, std::vector<ofColor>(1, color), metaData);
+}
+
+void ofxPonk::add(ofPolyline poly, vector<ofColor> colors, std::vector<std::pair<std::string, float>> metaData){
     
+    if(colors.size() < 1) return;
     fullData.push_back(dataFormat); // Write Format Data
     
     // Meta Data
@@ -38,17 +43,20 @@ void ofxPonk::add(ofPolyline poly, ofColor color, std::vector<std::pair<std::str
     
     push16bits(fullData,poly.getVertices().size());
     
+    bool multicolors = colors.size() == poly.size();
+    int i = 0;
     for(auto & p : poly.getVertices()){
         switch(dataFormat){
             case PONK_DATA_FORMAT_XY_F32_RGB_U8:
-                pushPoint_XY_F32_RGB_U8(fullData, p, color);
+                pushPoint_XY_F32_RGB_U8(fullData, p, multicolors ? colors[i] : colors[0]);
                 break;
             case PONK_DATA_FORMAT_XYRGB_U16:
-                pushPoint_XYRGB_U16(fullData, p, color);
+                pushPoint_XYRGB_U16(fullData, p, multicolors ? colors[i] : colors[0]);
                 break;
             default:
                 break;
         }
+        i++;
     }
     
 }
