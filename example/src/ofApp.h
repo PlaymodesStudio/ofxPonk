@@ -26,8 +26,12 @@ public:
     
     ofxPonk ponk_1;
     ofxPonk ponk_2;
+    ofxPonk ponk_3;
     ofPolyline poly_1;
     ofPolyline poly_2;
     ofPolyline poly_3;
+    ofPolyline poly_4;
+    
+    vector<ofColor> poly_4_colors;
 
 };
